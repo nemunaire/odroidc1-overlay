@@ -1,0 +1,24 @@
+diff --git a/arch/arm/config.mk b/arch/arm/config.mk
+index 0f9bffe..910723b 100755
+--- a/arch/arm/config.mk
++++ b/arch/arm/config.mk
+@@ -21,7 +21,7 @@
+ # MA 02111-1307 USA
+ #
+ 
+-CROSS_COMPILE ?= arm-none-eabi-
++CROSS_COMPILE ?= armv7a-hardfloat-linux-gnueabi-
+ #arm-linux-
+ 
+ ifeq ($(BOARD),omap2420h4)
+
+diff --git a/arch/arm/cpu/aml_meson/config.mk b/arch/arm/cpu/aml_meson/config.mk
+index 0f9bffe..910723b 100755
+--- a/arch/arm/cpu/aml_meson/config.mk
++++ b/arch/arm/cpu/aml_meson/config.mk
+@@ -1,4 +1,4 @@
+-CROSS_COMPILE=arm-none-eabi-
++CROSS_COMPILE=armv7a-hardfloat-linux-gnueabi-
+ ARM_CPU=cortex-a9
+ PLATFORM_CPPFLAGS += $(call cc-option,-mcpu=cortex-a9  -ffixed-r8 -mno-long-calls  -Wall -fPIC )
+ #USE_PRIVATE_LIBGCC=yes
