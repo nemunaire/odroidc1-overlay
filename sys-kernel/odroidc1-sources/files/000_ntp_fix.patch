@@ -1,0 +1,16 @@
+diff --git a/kernel/time/ntp.c b/kernel/time/ntp.c
+index 28db9be..0131530 100644
+--- a/kernel/time/ntp.c
++++ b/kernel/time/ntp.c
+@@ -632,9 +632,9 @@ int ntp_validate_timex(struct timex *txc)
+ 		return -EPERM;
+ 
+ 	if (txc->modes & ADJ_FREQUENCY) {
+-		if (LONG_MIN / PPM_SCALE > txc->freq)
++		if (-MAXFREQ_SCALED / PPM_SCALE > txc->freq)
+ 			return -EINVAL;
+-		if (LONG_MAX / PPM_SCALE < txc->freq)
++		if (MAXFREQ_SCALED / PPM_SCALE < txc->freq)
+ 			return -EINVAL;
+ 	}
+ 
