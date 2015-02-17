@@ -11,7 +11,6 @@ index 0f9bffe..910723b 100755
  #arm-linux-
  
  ifeq ($(BOARD),omap2420h4)
-
 diff --git a/arch/arm/cpu/aml_meson/config.mk b/arch/arm/cpu/aml_meson/config.mk
 index 0f9bffe..910723b 100755
 --- a/arch/arm/cpu/aml_meson/config.mk
@@ -20,5 +19,18 @@ index 0f9bffe..910723b 100755
 -CROSS_COMPILE=arm-none-eabi-
 +CROSS_COMPILE=armv7a-hardfloat-linux-gnueabi-
  ARM_CPU=cortex-a9
- PLATFORM_CPPFLAGS += $(call cc-option,-mcpu=cortex-a9  -ffixed-r8 -mno-long-calls  -Wall -fPIC )
- #USE_PRIVATE_LIBGCC=yes
+ PLATFORM_CPPFLAGS += $(call cc-option,-mcpu=cortex-a9 -ffixed-r8 -mno-long-calls  -Wall -fPIC )
+ PF_CPPFLAGS_NO_UNALIGNED := $(call cc-option, -mno-unaligned-access,)
+diff --git a/tools/env/Makefile b/tools/env/Makefile
+index 0f9bffe..910723b 100644
+--- a/tools/env/Makefile
++++ b/tools/env/Makefile
+@@ -25,7 +25,7 @@ include $(TOPDIR)/config.mk
+ 
+ ifdef CONFIG_AML_MESON 
+ HOSTSRCS	:=  fw_env_aml.c 
+-HOSTCC = arm-none-linux-gnueabi-gcc
++HOSTCC = armv7a-hardfloat-linux-gnueabi-gcc
+ else
+ HOSTSRCS := fw_env.c 
+ endif
