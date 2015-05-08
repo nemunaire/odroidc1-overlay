@@ -28,6 +28,10 @@ src_prepare() {
 
 src_compile() {
     export ARCH=arm
+	
+	# remove LDFLAGS as ld is called directly
+	unset LDFLAGS
+
     emake \
         HOSTSTRIP=: \
         HOSTCC="$(tc-getCC)" \
