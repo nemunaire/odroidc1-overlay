@@ -24,6 +24,11 @@ HOMEPAGE="https://github.com/hardkernel/linux"
 
 KEYWORDS="~arm"
 
+RDEPEND="
+	app-arch/lzop
+	dev-embedded/u-boot-tools
+	"
+
 src_unpack()
 {
 	git-r3_src_unpack
