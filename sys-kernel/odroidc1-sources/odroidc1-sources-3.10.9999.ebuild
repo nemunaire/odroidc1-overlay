@@ -24,12 +24,13 @@ HOMEPAGE="https://github.com/hardkernel/linux"
 
 KEYWORDS="~arm"
 
+RDEPEND="
+	app-arch/lzop
+	dev-embedded/u-boot-tools
+	"
+
 src_unpack()
 {
 	git-r3_src_unpack
 	unpack_set_extraversion
-}
-
-src_prepare() {
-    epatch "${FILESDIR}"/000_ntp_fix.patch
 }

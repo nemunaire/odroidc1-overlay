@@ -28,6 +28,10 @@ src_prepare() {
 
 src_compile() {
     export ARCH=arm
+	
+	# remove LDFLAGS as ld is called directly
+	unset LDFLAGS
+
     emake \
         HOSTSTRIP=: \
         HOSTCC="$(tc-getCC)" \
@@ -40,7 +44,8 @@ src_compile() {
 src_install() {
     cd build/tools
     dobin bmp_logo easylogo/easylogo env/fw_printenv gen_eth_addr img2srec inca-swap-bytes mkimage ncb ubsha1 uclpack
+
     cd ../..
-    insinto /opt/hardkernel
-    dodir sd_fuse
+    dodir /opt/hardkernel
+    cp -R sd_fuse ${D}/opt/hardkernel || die "could not copy sd_fuse directory"
 }
