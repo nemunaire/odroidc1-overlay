@@ -26,7 +26,8 @@ KEYWORDS="~arm"
 
 RDEPEND="
 	app-arch/lzop
-	dev-embedded/u-boot-tools
+	|| ( dev-embedded/u-boot-tools-odroidc1 dev-embedded/u-boot-tools )
+	sys-devel/bc
 	"
 
 src_unpack()
