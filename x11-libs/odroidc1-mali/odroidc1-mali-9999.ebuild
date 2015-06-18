@@ -32,6 +32,10 @@ src_install() {
 
 	emake "libdir=${D}/${opengl_dir}/lib" "includedir=${D}/${opengl_dir}/include" -C x11 install
 
+	# create symlink to libMali and libUMP into /usr/lib
+	dosym "opengl/${opengl_imp}/lib/libMali.so" "/usr/$(get_libdir)/libMali.so"
+        dosym "opengl/${opengl_imp}/lib/libUMP.so" "/usr/$(get_libdir)/libUMP.so"
+
 	# udev rules to get the right ownership/permission for /dev/ump and /dev/mali
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-mali-drivers.rules
