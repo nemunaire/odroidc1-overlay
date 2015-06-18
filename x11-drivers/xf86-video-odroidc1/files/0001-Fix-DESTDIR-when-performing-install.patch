@@ -1,0 +1,26 @@
+From 57350db41ded13afde63bd168ea26a63afec0f70 Mon Sep 17 00:00:00 2001
+From: root <root@satis.nemunai.re>
+Date: Thu, 18 Jun 2015 02:33:50 +0200
+Subject: [PATCH] Fix DESTDIR when performing install
+
+---
+ src/Makefile.in | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/Makefile.in b/src/Makefile.in
+index 4b750f1..ebaa925 100644
+--- a/src/Makefile.in
++++ b/src/Makefile.in
+@@ -529,7 +529,8 @@ install-dvi: install-dvi-am
+ install-dvi-am:
+ 
+ install-exec-am:
+-	install -m 0644 xorg.conf /etc/X11/xorg.conf
++	mkdir -p "$(DESTDIR)/etc/X11/"
++	install -m 0644 xorg.conf "$(DESTDIR)/etc/X11/xorg.conf"
+ 	
+ 
+ install-html: install-html-am
+-- 
+2.3.6
+
