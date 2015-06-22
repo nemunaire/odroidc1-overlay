@@ -1,0 +1,14 @@
+#!/sbin/runscript
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/hdparm/files/hdparm-init-8,v 1.3 2012/04/29 00:30:18 vapier Exp $
+
+depend() {
+        use udev
+}
+
+start() {
+        ebegin "Starting odroidc1_remote"
+	start-stop-daemon --start --exec /usr/bin/odroid_remote -- /etc/odroid_remote.conf
+	eend $?
+}
