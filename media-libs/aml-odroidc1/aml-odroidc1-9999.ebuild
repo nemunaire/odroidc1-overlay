@@ -17,9 +17,9 @@ RDEPEND="${DEPEND}
 
 
 src_install() {
-	dodir "/usr/include"
+	dodir "/usr/include" "/etc/ld.so.conf.d"
 
-	base_src_install
+	emake DESTDIR="${D}" install
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-amlogic.rules
