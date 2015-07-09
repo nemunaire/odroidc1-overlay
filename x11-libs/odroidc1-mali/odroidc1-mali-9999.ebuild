@@ -36,6 +36,9 @@ src_install() {
 	dosym "opengl/${opengl_imp}/lib/libMali.so" "/usr/$(get_libdir)/libMali.so"
         dosym "opengl/${opengl_imp}/lib/libUMP.so" "/usr/$(get_libdir)/libUMP.so"
 
+	dosym "${D}/${opengl_dir}/include/ump" "/usr/includes/ump"
+        dosym "${D}/${opengl_dir}/include/umplock" "/usr/includes/umplock"
+
 	# udev rules to get the right ownership/permission for /dev/ump and /dev/mali
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-mali-drivers.rules
