@@ -1,7 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=5
+EAPI=6
 
 ETYPE=sources
 
@@ -19,33 +20,33 @@ LICENSE="GPL-2"
 KEYWORDS="~arm"
 
 src_unpack() {
-    git-r3_src_unpack
+	git-r3_src_unpack
 }
 
 src_prepare() {
-    epatch "${FILESDIR}"/000_change_abi.patch
+	epatch "${FILESDIR}"/000_change_abi.patch
 }
 
 src_compile() {
-    export ARCH=arm
-	
+	export ARCH=arm
+
 	# remove LDFLAGS as ld is called directly
 	unset LDFLAGS
 
-    emake \
-        HOSTSTRIP=: \
-        HOSTCC="$(tc-getCC)" \
-        HOSTCFLAGS="${CFLAGS} ${CPPFLAGS}"' $(HOSTCPPFLAGS)' \
-        odroidc_config
-    emake
-    emake tools-all
+	emake \
+		HOSTSTRIP=: \
+		HOSTCC="$(tc-getCC)" \
+		HOSTCFLAGS="${CFLAGS} ${CPPFLAGS}"' $(HOSTCPPFLAGS)' \
+		odroidc_config
+	emake
+	emake tools-all
 }
 
 src_install() {
-    cd build/tools
-    dobin bmp_logo easylogo/easylogo env/fw_printenv gen_eth_addr img2srec inca-swap-bytes mkimage ncb ubsha1 uclpack
+	cd build/tools
+	dobin bmp_logo easylogo/easylogo env/fw_printenv gen_eth_addr img2srec inca-swap-bytes mkimage ncb ubsha1 uclpack
 
-    cd ../..
-    dodir /opt/hardkernel
-    cp -R sd_fuse ${D}/opt/hardkernel || die "could not copy sd_fuse directory"
+	cd ../..
+	dodir /opt/hardkernel
+	cp -R sd_fuse "${D}/opt/hardkernel" || die "could not copy sd_fuse directory"
 }

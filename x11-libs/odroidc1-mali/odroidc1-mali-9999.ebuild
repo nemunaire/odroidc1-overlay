@@ -1,4 +1,8 @@
-EAPI=5
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+EAPI=6
 
 inherit git-r3
 
@@ -6,13 +10,12 @@ EGIT_REPO_URI="git://github.com/mdrjr/c1_mali_libs.git"
 
 DESCRIPTION="Closed source drivers for Mali-400 Odroid-C1"
 HOMEPAGE="https://github.com/mdrjr/c1_mali_libs.git"
+LICENSE="all-rights-reserved"
 
 SLOT="0"
-KEYWORDS=""
-IUSE=""
+KEYWORDS="~arm"
 
-DEPEND="
-	>=app-eselect/eselect-opengl-1.2.6"
+DEPEND=">=app-eselect/eselect-opengl-1.2.6"
 RDEPEND="${DEPEND}
 	media-libs/mesa[gles1,gles2]"
 
@@ -34,10 +37,10 @@ src_install() {
 
 	# create symlink to libMali and libUMP into /usr/lib
 	dosym "opengl/${opengl_imp}/lib/libMali.so" "/usr/$(get_libdir)/libMali.so"
-        dosym "opengl/${opengl_imp}/lib/libUMP.so" "/usr/$(get_libdir)/libUMP.so"
+	dosym "opengl/${opengl_imp}/lib/libUMP.so" "/usr/$(get_libdir)/libUMP.so"
 
 	dosym "${D}/${opengl_dir}/include/ump" "/usr/includes/ump"
-        dosym "${D}/${opengl_dir}/include/umplock" "/usr/includes/umplock"
+	dosym "${D}/${opengl_dir}/include/umplock" "/usr/includes/umplock"
 
 	# udev rules to get the right ownership/permission for /dev/ump and /dev/mali
 	insinto /lib/udev/rules.d

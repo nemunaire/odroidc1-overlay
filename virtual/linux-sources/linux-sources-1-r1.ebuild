@@ -1,8 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/virtual/linux-sources/linux-sources-1.ebuild,v 1.11 2014/08/02 15:48:03 armin76 Exp $
+# $Id$
 
-EAPI=5
+EAPI=6
 
 DESCRIPTION="Virtual for Linux kernel sources"
 HOMEPAGE=""
@@ -26,10 +26,9 @@ RDEPEND="|| (
 		sys-kernel/rsbac-sources
 		sys-kernel/rt-sources
 		sys-kernel/tuxonice-sources
-		sys-kernel/usermode-sources
-		sys-kernel/vserver-sources
 		sys-kernel/xbox-sources
 		sys-kernel/zen-sources
 		sys-kernel/aufs-sources
+		sys-kernel/raspberrypi-sources
 		sys-kernel/odroidc1-sources
 	)"

@@ -1,7 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=5
+EAPI=6
 
 ETYPE=sources
 K_DEFCONFIG="odroidc_defconfig"
@@ -21,13 +22,15 @@ EGIT_CHECKOUT_DIR="$S"
 
 DESCRIPTION="Linux source for Odroid devices"
 HOMEPAGE="https://github.com/hardkernel/linux"
+LICENSE="GPL-2"
 
+SLOT="0"
 KEYWORDS="~arm"
 
+RDEPEND="sys-devel/bc"
 RDEPEND="
 	app-arch/lzop
 	|| ( dev-embedded/u-boot-tools-odroidc1 dev-embedded/u-boot-tools )
-	sys-devel/bc
 	"
 
 src_unpack()

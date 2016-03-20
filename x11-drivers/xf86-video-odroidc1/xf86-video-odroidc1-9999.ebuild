@@ -1,3 +1,7 @@
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
 EAPI=5
 
 inherit autotools-utils xorg-2 git-r3
@@ -10,12 +14,10 @@ HOMEPAGE="http://www.hardkernel.com/"
 
 KEYWORDS=""
 SLOT=0
-IUSE="gles1 gles2"
 
 RDEPEND="x11-base/xorg-server"
 DEPEND="${RDEPEND}
-	gles1? ( x11-libs/odroidc1-mali )
-	gles2? ( x11-libs/odroidc1-mali )
+	x11-libs/odroidc1-mali
 	x11-proto/fontsproto
 	x11-proto/xproto
 	x11-libs/libdrm"
