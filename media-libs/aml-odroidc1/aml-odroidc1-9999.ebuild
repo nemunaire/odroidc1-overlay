@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -17,9 +16,12 @@ SLOT="0"
 RDEPEND="media-libs/alsa-lib"
 
 src_install() {
-	dodir "/usr/include" "/etc/ld.so.conf.d"
+	dodir /usr/include /etc/ld.so.conf.d
 
 	emake DESTDIR="${D}" install
+
+	chmod +x ${D}/usr/include/amcodec ${D}/usr/include/amports ${D}/usr/include/cutils ${D}/usr/include/ppmgr || \
+		die "Unable to chmod directories"
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-amlogic.rules
