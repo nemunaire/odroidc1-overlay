@@ -1,0 +1,64 @@
+From 113d97b63e5ae42eb811cc58e52e0f7722cc23dc Mon Sep 17 00:00:00 2001
+From: Pierre-Olivier Mercier <nemunaire@nemunai.re>
+Date: Sun, 12 Nov 2017 00:13:36 +0100
+Subject: [PATCH] fix missing header
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+gcc -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer -std=gnu89 -I/usr/include   -o build/tools/gdb/gdbsend.o gdbsend.c -c
+fw_env_aml.c:65:2: error: unknown type name ‘uint8_t’
+  uint8_t mtd_type;  /* type of the MTD device */
+  ^
+fw_env_aml.c:93:2: error: unknown type name ‘uint32_t’
+  uint32_t crc; /* CRC32 over data bytes    */
+  ^
+fw_env_aml.c:98:2: error: unknown type name ‘uint32_t’
+  uint32_t crc; /* CRC32 over data bytes    */
+  ^
+fw_env_aml.c:111:2: error: unknown type name ‘uint32_t’
+  uint32_t  *crc;
+  ^
+fw_env_aml.c: In function ‘fw_env_close’:
+fw_env_aml.c:355:31: error: ‘uint8_t’ undeclared (first use in this function)
+  *environment.crc = crc32(0, (uint8_t *) environment.data, ENV_SIZE);
+                               ^
+fw_env_aml.c:355:31: note: each undeclared identifier is reported only once for each function it appears in
+fw_env_aml.c:355:40: error: expected expression before ‘)’ token
+  *environment.crc = crc32(0, (uint8_t *) environment.data, ENV_SIZE);
+                                        ^
+fw_env_aml.c:355:21: error: too few arguments to function ‘crc32’
+  *environment.crc = crc32(0, (uint8_t *) environment.data, ENV_SIZE);
+                     ^
+In file included from fw_env_aml.c:46:0:
+fw_env.h:58:23: note: declared here
+ extern unsigned long  crc32  (unsigned long, const unsigned char *, unsigned);
+                       ^
+fw_env_aml.c: At top level:
+fw_env_aml.c:642:37: error: unknown type name ‘uint8_t’
+ static int flash_bad_block (int fd, uint8_t mtd_type, loff_t *blockstart)
+                                     ^
+fw_env_aml.c:670:21: error: unknown type name ‘uint8_t’
+       off_t offset, uint8_t mtd_type)
+                     ^
+fw_env_aml.c:762:22: error: unknown type name ‘uint8_t’
+        off_t offset, uint8_t mtd_type)                      ^
+---
+ tools/env/fw_env_aml.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tools/env/fw_env_aml.c b/tools/env/fw_env_aml.c
+index 059dd10..d2aa994 100644
+--- a/tools/env/fw_env_aml.c
++++ b/tools/env/fw_env_aml.c
+@@ -27,6 +27,7 @@
+ #include <errno.h>
+ #include <fcntl.h>
+ #include <stdio.h>
++#include <stdint.h>
+ #include <stdlib.h>
+ #include <stddef.h>
+ #include <string.h>
+-- 
+2.13.6
+

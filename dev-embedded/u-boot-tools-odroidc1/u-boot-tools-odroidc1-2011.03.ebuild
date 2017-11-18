@@ -1,16 +1,12 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
-ETYPE=sources
-
-inherit eutils git-r3 versionator
+inherit toolchain-funcs eutils git-r3 versionator
 
 EGIT_REPO_URI=git://github.com/hardkernel/u-boot.git
 EGIT_BRANCH="odroidc-v$(get_version_component_range 1-2)"
-EGIT_CHECKOUT_DIR="$S"
 
 DESCRIPTION="Odroid C1 U-Boot"
 HOMEPAGE="https://github.com/hardkernel/u-boot"
@@ -19,32 +15,31 @@ LICENSE="GPL-2"
 
 KEYWORDS="~arm"
 
-src_unpack() {
-	git-r3_src_unpack
-}
-
-src_prepare() {
-	epatch "${FILESDIR}"/000_change_abi.patch
-}
+PATCHES=(
+	"${FILESDIR}/0001-fix-missing-header.patch"
+)
 
 src_compile() {
-	export ARCH=arm
-
-	# remove LDFLAGS as ld is called directly
-	unset LDFLAGS
-
+	# Unset a few KBUILD variables. Bug #540476
+	unset KBUILD_OUTPUT KBUILD_SRC
+	emake odroidc_config
 	emake \
 		HOSTSTRIP=: \
+		STRIP=: \
 		HOSTCC="$(tc-getCC)" \
 		HOSTCFLAGS="${CFLAGS} ${CPPFLAGS}"' $(HOSTCPPFLAGS)' \
-		odroidc_config
-	emake
-	emake tools-all
+		HOSTLDFLAGS="${LDFLAGS}" \
+		CONFIG_ENV_OVERWRITE=y \
+		tools-all
 }
 
 src_install() {
-	cd build/tools
-	dobin bmp_logo easylogo/easylogo env/fw_printenv gen_eth_addr img2srec inca-swap-bytes mkimage ncb ubsha1 uclpack
+	cd build/tools || die
+	dobin bmp_logo gen_eth_addr img2srec inca-swap-bytes mkimage ncb ubsha1 uclpack
+	dobin easylogo/easylogo
+	dobin env/fw_printenv
+	dosym fw_printenv /usr/bin/fw_setenv
+	doman "${S}"/doc/mkimage.1
 
 	cd ../..
 	dodir /opt/hardkernel
