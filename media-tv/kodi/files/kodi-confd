@@ -1,0 +1,7 @@
+#Configuration file for /etc/init.d/kodi
+
+#User to start kodi
+KODI_USER=""
+
+#Optional options for kodi
+KODI_OPTS=""

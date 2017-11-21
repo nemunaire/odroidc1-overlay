@@ -1,0 +1,27 @@
+#!/sbin/openrc-run
+# Distributed under the terms of the GNU General Public License v2
+
+description="Start and stop Kodi"
+
+depend() {
+	need net
+	need localmount
+	need local
+}
+
+start() {
+	ebegin "Starting kodi"
+	if [ -z "${KODI_USER}" ]; then
+		eend "No user defined in /etc/conf.d/kodi"
+	fi
+	
+	start-stop-daemon --start --background --make-pidfile --pidfile /var/run/kodi.pid -u "${KODI_USER}" --exec /usr/lib/kodi/kodi.bin -- --standalone ${KODI_OPTS}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping kodi"
+	start-stop-daemon --stop --pidfile /var/run/kodi.pid
+	eend $?
+}
+
