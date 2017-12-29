@@ -1,0 +1,56 @@
+diff --git a/fbdev/Makefile b/fbdev/Makefile
+index 020bf6b..baf7273 100644
+--- a/fbdev/Makefile
++++ b/fbdev/Makefile
+@@ -1,6 +1,6 @@
+-libdir := /usr/lib/arm-linux-gnueabihf/
+-includedir := /usr/include
+-pkgconfigdir := $(libdir)/pkgconfig
++libdir ?= /usr/lib/arm-linux-gnueabihf/
++includedir ?= /usr/include
++pkgconfigdir ?= $(libdir)/pkgconfig
+ 
+ install:
+ 	# Mali Binaries
+@@ -10,11 +10,4 @@ install:
+ 	
+ 	# Mali Headers
+ 	rm -rf $(includedir)/EGL $(includedir)/GLES $(includedir)/GLES2 $(includedir)/ump $(includedir)/umplock
+-	cp -aRP mali_headers/* /usr/include
+-	
+-	# PKG Config
+-	rm -fr $(pkgconfigdir)/glesv*.pc $(pkgconfigdir)/egl.pc
+-	cp -aRP ../pkgconfig/* $(pkgconfigdir)
+-	
+-
+-		
+\ No newline at end of file
++	cp -aRP mali_headers/* $(includedir)
+diff --git a/x11/Makefile b/x11/Makefile
+index cd1db76..a26d4ef 100644
+--- a/x11/Makefile
++++ b/x11/Makefile
+@@ -1,6 +1,6 @@
+-libdir := /usr/lib/arm-linux-gnueabihf/
+-includedir := /usr/include
+-pkgconfigdir := $(libdir)/pkgconfig
++libdir ?= /usr/lib/arm-linux-gnueabihf/
++includedir ?= /usr/include
++pkgconfigdir ?= $(libdir)/pkgconfig
+ 
+ install:
+ 	# Mali Binaries
+@@ -11,11 +11,4 @@ install:
+ 	
+ 	# Mali Headers
+ 	rm -rf $(includedir)/EGL $(includedir)/GLES $(includedir)/GLES2 $(includedir)/ump $(includedir)/umplock
+-	cp -aRP mali_headers/* /usr/include
+-	
+-	# PKG Config
+-	rm -fr $(pkgconfigdir)/glesv*.pc $(pkgconfigdir)/egl.pc
+-	cp -aRP ../pkgconfig/* $(pkgconfigdir)
+-	
+-
+-		
+\ No newline at end of file
++	cp -aRP mali_headers/* $(includedir)
