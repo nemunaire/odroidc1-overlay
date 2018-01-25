@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -60,13 +60,13 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/libcdio
 	lcms? ( media-libs/lcms:2 )
 	libusb? ( virtual/libusb:1 )
-	media-fonts/corefonts
 	>=media-fonts/noto-20160531
 	media-fonts/roboto
 	media-libs/fontconfig
 	media-libs/freetype
 	>=media-libs/libass-0.13.4
 	>=media-libs/taglib-1.11.1
+	virtual/ttf-fonts
 	system-ffmpeg? (
 		>=media-video/ffmpeg-${FFMPEG_VERSION}:=[encode,openssl,postproc]
 		<media-video/ffmpeg-3.4
@@ -82,7 +82,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	sftp? ( net-libs/libssh[sftp] )
 	sys-libs/zlib
 	udev? ( virtual/udev )
-	vaapi? ( x11-libs/libva[opengl] )
+	vaapi? ( x11-libs/libva:=[opengl] )
 	vdpau? (
 		|| ( >=x11-libs/libvdpau-1.1 >=x11-drivers/nvidia-drivers-180.51 )
 		system-ffmpeg? ( media-video/ffmpeg[vdpau] )
